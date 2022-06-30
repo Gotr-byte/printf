@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:01:37 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/06/26 10:55:50 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:42:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,56 @@
 #include <stdlib.h>
 
 void	ft_putchar(char c);
-int	ft_printf(const char *, ...);
+int	ft_printf(const char *prt, ...);
+void	ft_putstr(char *str);
 
-int	ft_printf(const char *, ...)
+void	ft_putstr(char *str)
 {
-char cType = *ptrInputStringCopy;
-ptrInputStringCopy++;
-while( *ptrInputStringCopy )
+	while (*str != '\0')
+	{
+		write (1, str, 1);
+		str = str + 1;
+	}
+}
+
+int	ft_printf(const char *prt, ...)
 {
-	if( *ptrInputStringCopy != '%' )
+char 			*parse;
+unsigned int	j;
+char			*str;
+va_list			arg;
+int				n;
+
+va_start(arg, prt);
+n = 0;
+parse = (char*)prt;
+
+while (*parse != '\0')
+{
+	while (*parse != '%' && *parse != '\0')
+	{
+	ft_putchar(*parse);
+	parse++;
+	}
+	if(*parse != '\0')
+		parse++;
+	
+	if (*parse == 'c' && *parse != '\0')
 		{
-			putchar( *ptrInputStringCopy ); 
-			ptrInputStringCopy++; 
-			continue;
+		j = va_arg(arg, int);
+		ft_putchar(j);
+		parse++;	
 		}
-	if (cType == 'd')
+	else if (*parse == 's' && *parse != '\0')
 		{
-			int intValue  =   va_arg( argumentList, int );
-			printf( " %d ", intValue );
-			++number_of_arguments;
-			break;
+			str = va_arg(arg, char*);
+			ft_putstr(str);
+			parse++;
 		}
 }
-	
-
+va_end(arg);
+}
+				
 void	ft_putchar(char c)
 {
 	write (1, &c, 1);
@@ -47,18 +73,19 @@ void	ft_putchar(char c)
 
 int	main ()
 {
-	int	main(void)
-{
-	int i;
-	char * aline = "NULL";
-	char * bline = "bline";
-	int t;
+	// int i;
+	// char * aline = "NULL";
+	char * bline;
+	
+	bline = "blineeeeer";
+	// int t;
 
-	i = 0;
-	t = -2147483648;
+	// i = 0;
+	// t = -2147483648;
 
-	ft_printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s ", i, aline, t, bline);
-	printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s", i, aline, t, bline);
-
+	// ft_printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s ", i, aline, t, bline);
+	// printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s", i, aline, t, bline);
+	ft_printf ("All my Heroes!%c %s 1111!!!!\n", 'c', bline);
 }
-}
+
+
