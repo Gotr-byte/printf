@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:01:37 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/04 12:27:25 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/07/04 15:56:04 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "ft_itoa_lu.c"
+#include "hext.c"
+#include "hexxt.c"
 
 void	ft_putchar(char c);
 int		ft_printf(const char *prt, ...);
@@ -190,6 +192,35 @@ while (*parse != '\0')
 			free(str);
 			parse++;
 		}
+	else if (*parse == 'x' && *parse != '\0')
+		{
+			k = va_arg(arg, unsigned int);
+			str = ft_itoa_x(k);
+			ft_putstr(str);
+			free(str);
+			parse++;
+		}
+	else if (*parse == 'x' && *parse != '\0')
+		{
+			k = va_arg(arg, unsigned int);
+			str = ft_itoa_x(k);
+			ft_putstr(str);
+			free(str);
+			parse++;
+		}
+	else if (*parse == 'X' && *parse != '\0')
+		{
+			k = va_arg(arg, unsigned int);
+			str = ft_itoa_xx(k);
+			ft_putstr(str);
+			free(str);
+			parse++;
+		}
+	else if (*parse == '%' && *parse != '\0')
+		{
+			ft_putchar('%');
+			parse++;
+		}
 }	
 va_end(arg);
 }
@@ -208,12 +239,12 @@ int	main ()
 
 	// i = 0;
 	t = -2147483648;
-	u = 2147483649;
+	u = 255;
 
 	// ft_printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s ", i, aline, t, bline);
 	// printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s", i, aline, t, bline);
-	ft_printf ("All my Heroes!%c %s %p %d %i	%u!!!!\n", 'c', bline, melkor, t, t, u);
-	printf ("All my Heroes!%c %s %p %d %i	%u!!!!\n", 'c', bline, melkor, t, t, u);
+	ft_printf ("All my Heroes!%c %s %p %d %i	%u %x %X %%!!!!\n", 'c', bline, melkor, t, t, u, u, u);
+	printf ("All my Heroes!%c %s %p %d %i	%u %x %X %%!!!!\n", 'c', bline, melkor, t, t, u, u, u);
 }
 
 // Everyone who doesn't have a mac: printf has different implementations on mac and other systems.

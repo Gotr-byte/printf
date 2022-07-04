@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hext.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/04 15:52:16 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/07/04 15:52:16 by pbiederm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-void	ft_putchar(char c);
+// void	ft_putchar(char c);
 static int	pow_ten(int n);
 static int	count_digit(long long n);
-char hex_digit (size_t v);
+char hex_digit_x (size_t v);
 
-void	ft_putchar(char c)
-{
-	write (1, &c, 1);
-}
+// void	ft_putchar(char c)
+// {
+// 	write (1, &c, 1);
+// }
 
 static int	count_hexdec(size_t n)
 {
@@ -43,11 +55,8 @@ static char	*append_x(char *ret_str, size_t long_n, size_t index)
 	hexdec_count = count_hexdec(long_n);
 	while (hexdec_count--)
 	{
-		ret_str[index] =hex_digit(long_n / pow_hexdec(hexdec_count)); 
-
-		printf("reg_str[%ld]: %c\n",index, ret_str[index]);
+		ret_str[index] =hex_digit_x(long_n / pow_hexdec(hexdec_count)); 
 		long_n = long_n % pow_hexdec(hexdec_count);
-		printf("'long n: %ld\n", long_n);
 		index++;
 	}
 	ret_str[index] = '\0';
@@ -74,7 +83,7 @@ char	*ft_itoa_x(unsigned long n)
 	return (ret_str);
 }
 
-char hex_digit (size_t v) 
+char hex_digit_x (size_t v) 
 {
     if (v >= 0 && v < 10)
         return '0' + v;
@@ -98,13 +107,13 @@ char hex_digit (size_t v)
 // 	}
 // }
 
-int main(void)
-{
-	int t;
+// int main(void)
+// {
+// 	int t;
 
-	t = 512;
+// 	t = 512;
 
-	// printf	("%%d: %d\n%%x: %x\n", t, t);
-	printf("ft_itoa_x(%d): %s\n",t, ft_itoa_x(t));
-	printf("printf (%d): %x\n", t, t);
-}
+// 	// printf	("%%d: %d\n%%x: %x\n", t, t);
+// 	printf("ft_itoa_x(%d): %s\n",t, ft_itoa_x(t));
+// 	printf("printf (%d): %x\n", t, t);
+// }
