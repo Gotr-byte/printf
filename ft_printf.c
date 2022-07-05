@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:01:37 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/04 15:56:04 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/07/05 08:33:24 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	ft_putstr(char *str)
 {
 	while (*str != '\0')
 	{
-		write (1, str, 1);
+		write (1, str, sizeof(str));
 		str = str + 1;
 	}
 }
@@ -174,6 +174,7 @@ while (*parse != '\0')
 		{
 			melkor = va_arg(arg, void*);
 			print_address_hex(melkor);
+			free(melkor);
 			parse++;
 		}
 	else if ((*parse == 'd' || *parse == 'i' )&& *parse != '\0')
