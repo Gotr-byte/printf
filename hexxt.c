@@ -73,8 +73,8 @@ char	*ft_itoa_xx(unsigned long n)
 	index = 0;
 	if (long_n > 4294967295)
 		return (NULL);
-	if (long_n < 0)
-		return (NULL);
+	// if (long_n < 0)
+	// 	return (NULL);
 	else
 		ret_str = (char *)malloc((count_hexdec_xx(long_n) + 1) * sizeof(char));
 	if (!ret_str)

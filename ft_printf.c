@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:01:37 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/05 08:33:24 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:54:57 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,87 @@ char	*ft_itoa(int n);
 char	*append(char *ret_str, long long int long_n, int index);
 static int	pow_ten(int n);
 static int	count_digit(long long n);
+char *prt_par_per(char *parse);
+char *prt_par_xx(unsigned int prt, char *parse);
+char *prt_par_x(unsigned int prt, char *parse);
+char *prt_par_lu(unsigned int prt, char *parse);
+char *prt_par_di(int prt, char *parse);
+char *print_address_hex (void* p0, char *parse);
+char *ft_putstr_par(char *str, char *parse);
+char	*ft_putchar_par(char c, char *parse);
+char	*prt_par_flag(unsigned int prt, char *parse, char flag);
+
+char	*prt_par_flag(unsigned int prt, char *parse, char flag)
+{
+	if (flag == 'u')
+		return (prt_par_lu(prt, parse));
+	else if (flag == 'x')
+		return (prt_par_x(prt, parse));
+	else if (flag == 'X')
+		return (prt_par_xx(prt, parse));
+}
+
+char *prt_par_per(char *parse)
+{
+	ft_putchar('%');
+	return (parse + 1);
+}
+
+char *prt_par_xx(unsigned int prt, char *parse)
+{
+	char* str;
+	
+	str = ft_itoa_xx(prt);
+	ft_putstr(str);
+	free(str);
+	return (parse + 1);
+}
+
+char *prt_par_x(unsigned int prt, char *parse)
+{
+	char* str;
+	
+	str = ft_itoa_x(prt);
+	ft_putstr(str);
+	free(str);
+	return (parse + 1);
+}
+
+char *prt_par_lu(unsigned int prt, char *parse)
+{
+	char* str;
+	
+	str = ft_itoa_lu(prt);
+	ft_putstr(str);
+	free(str);
+	return (parse + 1);
+}
+
+char *prt_par_di(int prt, char *parse)
+{
+	char* str;
+	
+	str = ft_itoa(prt);
+	ft_putstr(str);
+	free(str);
+	return (parse + 1);
+}
+
+char	*ft_putstr_par(char *str, char *parse)
+{
+	while (*str != '\0')
+	{
+		write (1, str, sizeof(char));
+		str = str + 1;
+	}
+	return(parse + 1);
+}
+	
+char	*ft_putchar_par(char c, char *parse)
+{
+	write (1, &c, sizeof(char));
+	return (parse + 1);
+}
 
 static int	count_digit(long long n)
 {
@@ -101,7 +182,7 @@ char hex_digit (int v)
         return 'a' + v - 10; // <-- Here
 }
 
-void print_address_hex (void* p0)
+char *print_address_hex (void* p0, char *parse)
 {
     int i;
     uintptr_t p;
@@ -115,13 +196,14 @@ void print_address_hex (void* p0)
 		ft_putchar(hex_digit((p >> i) & 0xf));
 		i -= 4;
 	}
+	return (parse + 1);
 }
 
 void	ft_putstr(char *str)
 {
 	while (*str != '\0')
 	{
-		write (1, str, sizeof(str));
+		write (1, str, 1);
 		str = str + 1;
 	}
 }
@@ -134,96 +216,34 @@ void	ft_putchar(char c)
 int	ft_printf(const char *prt, ...)
 {
 char 			*parse;
-unsigned int	j;
-char			*str;
 va_list			arg;
-int				n;
-void			*melkor;
-size_t			k;
-// size_t			u;
-	
-melkor = malloc (sizeof(melkor));	
 
 va_start(arg, prt);
-n = 0;
 parse = (char*)prt;
-
 while (*parse != '\0')
 {
 	while (*parse != '%' && *parse != '\0')
-		{
-		ft_putchar(*parse);
-		parse++;
-		}
-	if(*parse != '\0')
-		parse++;
-	
+		parse = ft_putchar_par(*parse, parse);
+	parse++;
 	if (*parse == 'c' && *parse != '\0')
-		{
-		j = va_arg(arg, int);
-		ft_putchar(j);
-		parse++;	
-		}
+		parse = ft_putchar_par(va_arg(arg, int), parse);
 	else if (*parse == 's' && *parse != '\0')
-		{
-			str = va_arg(arg, char*);
-			ft_putstr(str);
-			parse++;
-		}
+		parse = ft_putstr_par(va_arg(arg, char*), parse);
 	else if (*parse == 'p' && *parse != '\0')
-		{
-			melkor = va_arg(arg, void*);
-			print_address_hex(melkor);
-			free(melkor);
-			parse++;
-		}
+		parse =	print_address_hex(va_arg(arg, void*), parse);
 	else if ((*parse == 'd' || *parse == 'i' )&& *parse != '\0')
-		{
-			k = va_arg(arg, int);
-			str = ft_itoa(k);
-			ft_putstr(str);
-			free(str);
-			parse++;
-		}
-	else if (*parse == 'u' && *parse != '\0')
-		{
-			k = va_arg(arg, unsigned int);
-			str = ft_itoa_lu(k);
-			ft_putstr(str);
-			free(str);
-			parse++;
-		}
-	else if (*parse == 'x' && *parse != '\0')
-		{
-			k = va_arg(arg, unsigned int);
-			str = ft_itoa_x(k);
-			ft_putstr(str);
-			free(str);
-			parse++;
-		}
-	else if (*parse == 'x' && *parse != '\0')
-		{
-			k = va_arg(arg, unsigned int);
-			str = ft_itoa_x(k);
-			ft_putstr(str);
-			free(str);
-			parse++;
-		}
-	else if (*parse == 'X' && *parse != '\0')
-		{
-			k = va_arg(arg, unsigned int);
-			str = ft_itoa_xx(k);
-			ft_putstr(str);
-			free(str);
-			parse++;
-		}
+		parse = prt_par_di(va_arg(arg, int), parse);
+	// else if (*parse == 'u' && *parse != '\0')
+	// 	parse = prt_par_lu(va_arg(arg, unsigned int), parse);
+	// else if (*parse == 'x' && *parse != '\0')
+	// 	parse = prt_par_x(va_arg(arg, unsigned int), parse);
+	// else if (*parse == 'X' && *parse != '\0')
+	// 	parse = prt_par_xx(va_arg(arg, unsigned int), parse);
 	else if (*parse == '%' && *parse != '\0')
-		{
-			ft_putchar('%');
-			parse++;
-		}
+		parse = prt_par_per(parse);
+	else if ((*parse == 'u'|| *parse =='x' || *parse =='X') && *parse != '\0')
+		parse = prt_par_flag(va_arg(arg, unsigned int), parse, *parse);// use of flags
 }	
-va_end(arg);
 }
 
 int	main ()
@@ -244,12 +264,12 @@ int	main ()
 
 	// ft_printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s ", i, aline, t, bline);
 	// printf ("Hi \"party\nhungover\\shoes  \n\0flipflops %d %s %d %s", i, aline, t, bline);
-	ft_printf ("All my Heroes!%c %s %p %d %i	%u %x %X %%!!!!\n", 'c', bline, melkor, t, t, u, u, u);
-	printf ("All my Heroes!%c %s %p %d %i	%u %x %X %%!!!!\n", 'c', bline, melkor, t, t, u, u, u);
+	ft_printf ("All my Heroes!%c %s %p %d %i	%u %x %X %%!!!!\n", 'e', bline, melkor, t, t, u, u, u);
+	printf ("All my Heroes!%c %s %p %d %i	%u %x %X %%!!!!\n", 'e', bline, melkor, t, t, u, u, u);
 }
 
 // Everyone who doesn't have a mac: printf has different implementations on mac and other systems.
 //  I think the only difference is the NULL void pointer. 
 //  So your printf should print "0x0" in case of ft_printf("%p", NULL);
 //   to pass moulinette
-
+// use flags
