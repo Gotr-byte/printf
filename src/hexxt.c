@@ -16,15 +16,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// void	ft_putchar(char c);
-static int	pow_ten_xx(int n);
-static int	count_digit_xx(long long n);
-char hex_digit_xx (size_t v);
-
-// void	ft_putchar(char c)
-// {
-// 	write (1, &c, 1);
-// }
+static size_t	pow_hexdec_xx(size_t n);
+static int		count_hexdec_xx(size_t n);
+static char		hex_digit_xx (size_t v);
 
 static int	count_hexdec_xx(size_t n)
 {
@@ -73,8 +67,6 @@ char	*ft_itoa_xx(unsigned long n)
 	index = 0;
 	if (long_n > 4294967295)
 		return (NULL);
-	// if (long_n < 0)
-	// 	return (NULL);
 	else
 		ret_str = (char *)malloc((count_hexdec_xx(long_n) + 1) * sizeof(char));
 	if (!ret_str)
@@ -83,9 +75,10 @@ char	*ft_itoa_xx(unsigned long n)
 	return (ret_str);
 }
 
-char hex_digit_xx (size_t v) 
+static char hex_digit_xx (size_t v) 
 {
-    if (v >= 0 && v < 10)
+    // if (v >= 0 && v < 10)
+	if (v < 10)
         return '0' + v;
     else
         return 'A' + v - 10;

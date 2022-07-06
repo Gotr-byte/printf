@@ -10,21 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdio.h>
+// #include <unistd.h>
+// #include <limits.h>
+// #include <stdlib.h>
+// #include <stdio.h>
+#include "printf.h"
 
-// void	ft_putchar(char c);
-static int	pow_ten(int n);
-static int	count_digit(long long n);
-char hex_digit_x (size_t v);
-
-// void	ft_putchar(char c)
-// {
-// 	write (1, &c, 1);
-// }
+static char hex_digit_x (size_t v);
 
 static int	count_hexdec(size_t n)
 {
@@ -73,8 +66,8 @@ char	*ft_itoa_x(unsigned long n)
 	index = 0;
 	if (long_n > 4294967295)
 		return (NULL);
-	if (long_n < 0)
-		return (NULL);
+	// if (long_n < 0)
+	// 	return (NULL);
 	else
 		ret_str = (char *)malloc((count_hexdec(long_n) + 1) * sizeof(char));
 	if (!ret_str)
@@ -83,29 +76,14 @@ char	*ft_itoa_x(unsigned long n)
 	return (ret_str);
 }
 
-char hex_digit_x (size_t v) 
+static char hex_digit_x (size_t v) 
 {
-    if (v >= 0 && v < 10)
+    // if (v >= 0 && v < 10)
+	if (v < 10)
         return '0' + v;
     else
         return 'a' + v - 10;
 }
-
-// void print_address_hex (void* p0)
-// {
-//     int i;
-//     uintptr_t p;
-	
-// 	p = (uintptr_t)p0;
-//     ft_putchar('0'); 
-// 	ft_putchar('x');
-// 	i = (sizeof(p) << 3) - 20;
-// 	while (i >= 0)
-// 	{
-// 		ft_putchar(hex_digit((p >> i) & 0xf));
-// 		i -= 4;
-// 	}
-// }
 
 // int main(void)
 // {

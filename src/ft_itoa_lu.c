@@ -10,21 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// Function name ft_itoa
-// Prototype char *ft_itoa(int n);
-// Turn in files -
-// Parameters n: the integer to convert.
-// Return value The string representing the integer.
-// NULL if the allocation fails.
-// External functs. malloc
-// Description Allocates (with malloc(3)) and returns a string
-// representing the integer received as
-// 2,147,483,647 - max intiger value
+// #include <unistd.h>
+// #include <limits.h>
+// #include <stdlib.h>
+// #include <stdio.h>
 
-#include <unistd.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 static int	count_digit_lu(size_t n)
 {
@@ -73,8 +64,8 @@ char	*ft_itoa_lu(unsigned long n)
 	index = 0;
 	if (long_n > 4294967295)
 		return (NULL);
-	if (long_n < 0)
-		return (NULL);
+	// if (long_n < 0)
+	// 	return (NULL);
 	else
 		ret_str = (char *)malloc((count_digit_lu(long_n) + 1) * sizeof(char));
 	if (!ret_str)
