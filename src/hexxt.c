@@ -10,15 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "printf.h"
 
 static size_t	pow_hexdec_xx(size_t n);
 static int		count_hexdec_xx(size_t n);
-static char		hex_digit_xx (size_t v);
+static char		hex_digit_xx(size_t v);
 
 static int	count_hexdec_xx(size_t n)
 {
@@ -49,7 +45,7 @@ static char	*append_xx(char *ret_str, size_t long_n, size_t index)
 	hexdec_count = count_hexdec_xx(long_n);
 	while (hexdec_count--)
 	{
-		ret_str[index] =hex_digit_xx(long_n / pow_hexdec_xx(hexdec_count)); 
+		ret_str[index] = hex_digit_xx(long_n / pow_hexdec_xx(hexdec_count));
 		long_n = long_n % pow_hexdec_xx(hexdec_count);
 		index++;
 	}
@@ -60,7 +56,7 @@ static char	*append_xx(char *ret_str, size_t long_n, size_t index)
 char	*ft_itoa_xx(unsigned long n)
 {
 	char			*ret_str;
-	size_t	index;
+	size_t			index;
 	size_t			long_n;
 
 	long_n = (size_t)n;
@@ -75,20 +71,18 @@ char	*ft_itoa_xx(unsigned long n)
 	return (ret_str);
 }
 
-static char hex_digit_xx (size_t v) 
+static char	hex_digit_xx(size_t v)
 {
-    // if (v >= 0 && v < 10)
 	if (v < 10)
-        return '0' + v;
-    else
-        return 'A' + v - 10;
+		return ('0' + v);
+	else
+		return ('A' + v - 10);
 }
 
 // void print_address_hex (void* p0)
 // {
 //     int i;
 //     uintptr_t p;
-	
 // 	p = (uintptr_t)p0;
 //     ft_putchar('0'); 
 // 	ft_putchar('x');

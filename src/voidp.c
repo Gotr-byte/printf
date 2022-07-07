@@ -17,21 +17,21 @@ void	ft_putchar(char c)
 	write (1, &c, 1);
 }
 
-char hex_digit (int v) 
+static char	hex_digit(int v)
 {
-    if (v >= 0 && v < 10)
-        return '0' + v;
-    else
-        return 'a' + v - 10; // <-- Here
+	if (v >= 0 && v < 10)
+		return ('0' + v);
+	else
+		return ('a' + v - 10);
 }
 
-char *print_address_hex (void* p0, char *parse)
+char	*print_address_hex(void *p0, char *parse)
 {
-    int i;
-    uintptr_t p;
-	
+	int			i;
+	uintptr_t	p;
+
 	p = (uintptr_t)p0;
-    ft_putchar('0'); 
+	ft_putchar('0');
 	ft_putchar('x');
 	i = (sizeof(p) << 3) - 20;
 	while (i >= 0)

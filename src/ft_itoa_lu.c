@@ -15,7 +15,7 @@
 // #include <stdlib.h>
 // #include <stdio.h>
 
-#include "libft.h"
+#include "printf.h"
 
 static int	count_digit_lu(size_t n)
 {
@@ -57,15 +57,13 @@ static char	*append_lu(char *ret_str, size_t long_n, size_t index)
 char	*ft_itoa_lu(unsigned long n)
 {
 	char			*ret_str;
-	size_t	index;
+	size_t			index;
 	size_t			long_n;
 
 	long_n = (size_t)n;
 	index = 0;
 	if (long_n > 4294967295)
 		return (NULL);
-	// if (long_n < 0)
-	// 	return (NULL);
 	else
 		ret_str = (char *)malloc((count_digit_lu(long_n) + 1) * sizeof(char));
 	if (!ret_str)

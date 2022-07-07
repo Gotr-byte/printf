@@ -10,14 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <unistd.h>
-// #include <limits.h>
-// #include <stdlib.h>
-// #include <stdio.h>
 #include "printf.h"
 
-static char hex_digit_x (size_t v);
+static char	hex_digit_x(size_t v);
 
 static int	count_hexdec(size_t n)
 {
@@ -48,7 +43,7 @@ static char	*append_x(char *ret_str, size_t long_n, size_t index)
 	hexdec_count = count_hexdec(long_n);
 	while (hexdec_count--)
 	{
-		ret_str[index] =hex_digit_x(long_n / pow_hexdec(hexdec_count)); 
+		ret_str[index] = hex_digit_x(long_n / pow_hexdec(hexdec_count));
 		long_n = long_n % pow_hexdec(hexdec_count);
 		index++;
 	}
@@ -59,15 +54,13 @@ static char	*append_x(char *ret_str, size_t long_n, size_t index)
 char	*ft_itoa_x(unsigned long n)
 {
 	char			*ret_str;
-	size_t	index;
+	size_t			index;
 	size_t			long_n;
 
 	long_n = (size_t)n;
 	index = 0;
 	if (long_n > 4294967295)
 		return (NULL);
-	// if (long_n < 0)
-	// 	return (NULL);
 	else
 		ret_str = (char *)malloc((count_hexdec(long_n) + 1) * sizeof(char));
 	if (!ret_str)
@@ -76,13 +69,12 @@ char	*ft_itoa_x(unsigned long n)
 	return (ret_str);
 }
 
-static char hex_digit_x (size_t v) 
+static char	hex_digit_x(size_t v)
 {
-    // if (v >= 0 && v < 10)
 	if (v < 10)
-        return '0' + v;
-    else
-        return 'a' + v - 10;
+		return ('0' + v);
+	else
+		return ('a' + v - 10);
 }
 
 // int main(void)
