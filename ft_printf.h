@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 21:22:38 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/07 21:22:38 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/07/09 11:09:12 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/07/09 11:09:12 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # include <unistd.h>
 # include <stdio.h>
 # include <stdarg.h>
@@ -48,4 +48,5 @@ char		*print_address_hex(void *p0, char *parse);
 char		*ft_putstr_par(char *str, char *parse);
 char		*ft_putchar_par(char c, char *parse);
 char		*prt_par_flag(unsigned int prt, char *parse, char flag);
+char		*ft_itoa_lu(unsigned long n);
 #endif

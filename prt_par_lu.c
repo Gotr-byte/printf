@@ -1,43 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_hex_address.c                                :+:      :+:    :+:   */
+/*   prt_par_lu.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 11:03:13 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/08 11:03:19 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/07/08 19:17:52 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/07/09 11:03:37 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-static void	ft_putchar(char c)
+char	*prt_par_lu(unsigned int prt, char *parse)
 {
-	write (1, &c, 1);
-}
+	char	*str;
 
-static char	hex_digit(int v)
-{
-	if (v >= 0 && v < 10)
-		return ('0' + v);
-	else
-		return ('a' + v - 10);
-}
-
-char	*print_address_hex(void *p0, char *parse)
-{
-	int			i;
-	uintptr_t	p;
-
-	p = (uintptr_t)p0;
-	ft_putchar('0');
-	ft_putchar('x');
-	i = (sizeof(p) << 3) - 20;
-	while (i >= 0)
-	{
-		ft_putchar(hex_digit((p >> i) & 0xf));
-		i -= 4;
-	}
+	str = ft_itoa_lu(prt);
+	ft_putstr(str);
+	free(str);
 	return (parse + 1);
 }

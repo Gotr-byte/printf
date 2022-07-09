@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hext.c                                             :+:      :+:    :+:   */
+/*   hexxt.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 15:52:16 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/04 15:52:16 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/07/04 15:53:08 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/07/04 15:53:08 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-static char	hex_digit_x(size_t v);
+static size_t	pow_hexdec_xx(size_t n);
+static int		count_hexdec_xx(size_t n);
+static char		hex_digit_xx(size_t v);
 
-static int	count_hexdec(size_t n)
+static int	count_hexdec_xx(size_t n)
 {
 	if (n / 16 == 0)
 		return (1);
-	return (1 + count_hexdec(n / 16));
+	return (1 + count_hexdec_xx(n / 16));
 }
 
-static size_t	pow_hexdec(size_t n)
+static size_t	pow_hexdec_xx(size_t n)
 {
 	size_t	pow_ten;
 
@@ -36,22 +38,22 @@ static size_t	pow_hexdec(size_t n)
 	return (pow_ten);
 }
 
-static char	*append_x(char *ret_str, size_t long_n, size_t index)
+static char	*append_xx(char *ret_str, size_t long_n, size_t index)
 {
 	size_t				hexdec_count;
 
-	hexdec_count = count_hexdec(long_n);
+	hexdec_count = count_hexdec_xx(long_n);
 	while (hexdec_count--)
 	{
-		ret_str[index] = hex_digit_x(long_n / pow_hexdec(hexdec_count));
-		long_n = long_n % pow_hexdec(hexdec_count);
+		ret_str[index] = hex_digit_xx(long_n / pow_hexdec_xx(hexdec_count));
+		long_n = long_n % pow_hexdec_xx(hexdec_count);
 		index++;
 	}
 	ret_str[index] = '\0';
 	return (ret_str);
 }
 
-char	*ft_itoa_x(unsigned long n)
+char	*ft_itoa_xx(unsigned long n)
 {
 	char			*ret_str;
 	size_t			index;
@@ -62,20 +64,35 @@ char	*ft_itoa_x(unsigned long n)
 	if (long_n > 4294967295)
 		return (NULL);
 	else
-		ret_str = (char *)malloc((count_hexdec(long_n) + 1) * sizeof(char));
+		ret_str = (char *)malloc((count_hexdec_xx(long_n) + 1) * sizeof(char));
 	if (!ret_str)
 		return (NULL);
-	ret_str = append_x(ret_str, long_n, index);
+	ret_str = append_xx(ret_str, long_n, index);
 	return (ret_str);
 }
 
-static char	hex_digit_x(size_t v)
+static char	hex_digit_xx(size_t v)
 {
 	if (v < 10)
 		return ('0' + v);
 	else
-		return ('a' + v - 10);
+		return ('A' + v - 10);
 }
+
+// void print_address_hex (void* p0)
+// {
+//     int i;
+//     uintptr_t p;
+// 	p = (uintptr_t)p0;
+//     ft_putchar('0'); 
+// 	ft_putchar('x');
+// 	i = (sizeof(p) << 3) - 20;
+// 	while (i >= 0)
+// 	{
+// 		ft_putchar(hex_digit((p >> i) & 0xf));
+// 		i -= 4;
+// 	}
+// }
 
 // int main(void)
 // {

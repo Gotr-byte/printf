@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   prt_par_per.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 19:09:21 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/08 19:09:43 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/07/08 19:05:00 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/07/09 11:03:39 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-void	ft_putstr(char *str)
+char	*prt_par_per(char *parse)
 {
-	while (*str != '\0')
-	{
-		write (1, str, 1);
-		str = str + 1;
-	}
+	ft_putchar('%');
+	return (parse + 1);
 }

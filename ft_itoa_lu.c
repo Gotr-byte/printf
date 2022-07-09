@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <unistd.h>
-// #include <limits.h>
-// #include <stdlib.h>
-// #include <stdio.h>
-
-#include "printf.h"
+#include "ft_printf.h"
 
 static int	count_digit_lu(size_t n)
 {

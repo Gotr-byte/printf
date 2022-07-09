@@ -6,11 +6,11 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:01:37 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/08 19:39:33 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/07/09 11:03:21 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 char	*prt_par_flag(unsigned int prt, char *parse, char flag)
 {

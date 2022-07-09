@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prt_par_lu.c                                       :+:      :+:    :+:   */
+/*   prt_par_x.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 19:17:52 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/08 19:20:00 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/07/08 19:12:17 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/07/09 11:03:42 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-char	*prt_par_lu(unsigned int prt, char *parse)
+char	*prt_par_x(unsigned int prt, char *parse)
 {
 	char	*str;
 
-	str = ft_itoa_lu(prt);
+	str = ft_itoa_x(prt);
 	ft_putstr(str);
 	free(str);
 	return (parse + 1);
