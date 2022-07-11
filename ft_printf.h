@@ -35,7 +35,7 @@
 void		ft_putchar(char c);
 int			ft_printf(const char *prt, ...);
 void		ft_putstr(char *str);
-char		*ft_itoa(int n);
+// char		*ft_itoa(int n);
 char		*ft_itoa_x(unsigned long n);
 char		*ft_itoa_xx(unsigned long n);
 char		*append(char *ret_str, long long int long_n, int index);

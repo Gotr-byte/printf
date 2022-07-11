@@ -1,40 +1,41 @@
 NAME := libftprintf.a
 LIBFT_DIR = libft/
 LIBFT_EXEC = libft/libft.a
-SRCFILES := $(SRC_DIR)ft_itoa_lu.c \
-		$(SRC_DIR)ft_itoa_x.c \
-		$(SRC_DIR)ft_itoa_xx.c \
-		$(SRC_DIR)ft_printf.c \
-		$(SRC_DIR)ft_putchar.c \
-		$(SRC_DIR)ft_putstr.c \
-		$(SRC_DIR)print_hex_address.c \
-		$(SRC_DIR)prt_par_lu.c \
-		$(SRC_DIR)prt_par_per.c \
-		$(SRC_DIR)prt_par_x.c \
-		$(SRC_DIR)prt_par_xx.c
+SRCFILES := ft_itoa_lu.c \
+		ft_itoa_x.c \
+		ft_itoa_xx.c \
+		ft_printf.c \
+		ft_putchar.c \
+		ft_putstr.c \
+		print_hex_address.c \
+		prt_par_lu.c \
+		prt_par_per.c \
+		prt_par_x.c \
+		prt_par_xx.c
 
 CC = gcc
 CFLAGS = -Wextra -Werror -Wall
 
 OBJS := $(SRCFILES:.c=.o) 
 
-all: lib $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) lib
-	@ar r $(NAME) libft/libft.a $(OBJS)
+exec:
+	$(CC) -g $(CFLAGS) $(SRCFILES) libft/ft_itoa.c
 
-lib: force
+$(NAME): $(OBJS)
 	make -C libft/
-
-force: ;
+	cp libft/libft.a .
+	mv libft.a $(NAME)
+	ar r $(NAME) $(OBJS)
 
 clean:
 	# rm -f *.o
 	rm -f $(OBJS)
-	make clean -C libft
+	make clean -C libft/
 fclean:	clean
 	rm -f $(NAME)
-	make fclean -C libft
+	make fclean -C libft/
 	
 re:		fclean all
 

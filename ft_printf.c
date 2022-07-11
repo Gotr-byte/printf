@@ -6,9 +6,13 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:01:37 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/09 11:03:21 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/07/10 13:11:29 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
+#include "./libft/libft.h"
+#include <string.h>
 
 #include "ft_printf.h"
 
@@ -55,12 +59,19 @@ int	ft_printf(const char *prt, ...)
 	va_list			arg;
 
 	va_start(arg, prt);
+	
 	p = (char *)prt;
 	while (*p != '\0')
 	{
 		while (*p != '%' && *p != '\0')
-			p = ft_putchar_par(*p, p);
+			{
+				p = ft_putchar_par(*p, p);
+				printf("strlen %lu", strlen(p));
+				break ;
+			}
+
 		p++;
+
 		if (*p == 'c' && *p != '\0')
 			p = ft_putchar_par(va_arg(arg, int), p);
 		else if (*p == 's' && *p != '\0')
@@ -75,29 +86,37 @@ int	ft_printf(const char *prt, ...)
 			p = prt_par_flag(va_arg(arg, unsigned int), p, *p);
 	}
 	va_end(arg);
-	return (0);
+	return(0);
 }
 
-// int	main ()
-// {
-// 	// int i;
-// 	// char * aline = "NULL";
-// 	char * bline;
-// 	void	*melkor;
-// 	melkor = malloc (sizeof(melkor));	
-// 	bline = "blineeeeer";
-// 	int t;
-// 	unsigned int u;
-// 	// i = 0;
-// 	t = -2147483648;
-// 	u = 255;
+int	main ()
+{
+	// int i;
+	// char * aline = "NULL";
+	// char * bline;
+	// void	*melkor;
+	// melkor = malloc (sizeof(melkor));	
+	// bline = "blineeeeer";
+	// int t;
+	// unsigned int u;
+	// i = 0;
+	// t = -2147483648;
+	// u = 255;
 
-// 	// ft_printf ("Hi \"party\nhungover\\
-// shoes\n\0flipflops %d %s %d %s ", i, aline, t, bline);
-// 	// printf ("Hi \"party\nhungover\\shoes
-// 	//   \n\0flipflops %d %s %d %s", i, aline, t, bline);
-// 	ft_printf ("All my Heroes!%c %s %p 
-// %d %i %u %x %X %%!!!!\n", 'e', bline, melkor, t, t, u, u, u);
-// 	printf ("All my Heroes!%c %s %p 
-// %d %i %u %x %X %%!!!!\n", 'e', bline, melkor, t, t, u, u, u);
-// }
+	// ft_printf ("Hi \"party\nhungover\\shoes\n\0flipflops %d %s %d %s ", i, aline, t, bline);
+	// printf ("Hi \"party\nhungover\\shoes
+	//   \n\0flipflops %d %s %d %s", i, aline, t, bline);
+	// ft_printf ("All my Heroes!%c %s %p %d %i %u %x %X %%!!!!\n", 'e', bline, melkor, t, t, u, u, u);
+	// printf ("All my Heroes!%c %s %p %d %i %u %x %X %%!!!!\n", 'e', bline, melkor, t, t, u, u, u);
+	// int tez;
+	// int minne;
+
+	ft_printf ("Hades was the king of Tartarus\n%");
+	// minne = printf ("Hades was the king of Tartarus\n");
+	// printf ("ft_printf: %d\n", tez);
+	// printf ("printf: %d\n", minne);
+}
+
+// you want the functions to return the lenght
+// now we shift the pointer through the printed
+// the condition where it should check for the flags should be an if statement within the while loop
