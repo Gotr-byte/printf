@@ -318,7 +318,7 @@ char	*ft_itoa(int n)
 
 int	ft_putstr_i(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -360,12 +360,12 @@ int	adr_hex(void *p0)
 	uintptr_t	p;
 
 	if (p0 == NULL)
-		{
-			ret = ft_putchar('0');
-			ret = ret + ft_putchar('x');
-			ret = ret + ft_putchar('0');
-			return(ret);
-		}
+	{
+		ret = ft_putchar('0');
+		ret = ret + ft_putchar('x');
+		ret = ret + ft_putchar('0');
+		return (ret);
+	}
 	p = (uintptr_t)p0;
 	ret = ft_putchar('0');
 	ret = ret + ft_putchar('x');
@@ -396,19 +396,10 @@ int	ft_printf(const char *prt, ...)
 	while (prt[n] != '\0')
 	{
 		if (prt[n] != '%')
-		{
-			n = n + ft_putchar_i(prt[n]);
-			ret++;
-		}
+			ret = ret + ft_putchar_i(prt[n]);
 		else if (prt[n++] == '%')
-		{
-			// n++;
-			if ((prt[n] == 'u' || prt[n] == 'x' || prt[n] == 'X' || prt[n] == 'p' || prt[n] == 'd' || prt[n] == 'i' || prt[n] == 'c' || prt[n] == 's') || prt[n] == '%')
-			{
-				ret = ret + flag(arg, prt[n]);
-				n++;
-			}
-		}
+			ret = ret + flag(arg, prt[n]);
+		n++;
 	}
 	va_end(arg);
 	return (ret);
@@ -422,12 +413,9 @@ int	main(void)
 	int		minne;
 
 	bline = "blineeeeer";
-
 	melkor = NULL;
-	tez = ft_printf ("%%Eldrich blast %s %d %i %u %c %p %x %X%%\n%%", "is cast and deals", 24, -21, 111, 'c', melkor, 111, 111);
-	minne = printf ("%%Eldrich blast %s %d %i %u %c %p %x %X%%\n%%", "is cast and deals", 24, -21, 111, 'c', melkor, 111, 111);
+	tez = ft_printf ("%%Eldrich blast %s %d %i %u %c %p %x %X%%\n", "is cast and deals", 24, -21, 111, 'c', melkor, 111, 111);
+	minne = printf ("%%Eldrich blast %s %d %i %u %c %p %x %X%%\n", "is cast and deals", 24, -21, 111, 'c', melkor, 111, 111);
 	printf ("ft_printf: %d\n", tez);
 	printf ("printf: %d\n", minne);
 }
-
-
