@@ -245,7 +245,8 @@ int	flag(va_list arg, char flag)
 		return (ft_putchar_i(va_arg(arg, int)));
 	else if (flag == 's')
 		return (ft_putstr_i(va_arg(arg, char*)));
-
+	else if (flag == '%')
+		return (write(1, "%", sizeof(char)));
 	return (0);
 }
 
@@ -394,67 +395,37 @@ int	ft_printf(const char *prt, ...)
 	va_start(arg, prt);
 	while (prt[n] != '\0')
 	{
-		if ( prt [n] != '%')
+		if (prt[n] != '%')
 		{
 			n = n + ft_putchar_i(prt[n]);
 			ret++;
 		}
-		else if (prt [n] == '%')
+		else if (prt[n++] == '%')
+		{
+			// n++;
+			if ((prt[n] == 'u' || prt[n] == 'x' || prt[n] == 'X' || prt[n] == 'p' || prt[n] == 'd' || prt[n] == 'i' || prt[n] == 'c' || prt[n] == 's') || prt[n] == '%')
 			{
+				ret = ret + flag(arg, prt[n]);
 				n++;
-				if (prt[n] == '%')
-					{
-						ret = ret + write(1, "%", 1);
-						n++;
-					}
-				// if (prt[n] == 'c')
-				// 	{
-				// 		ret = ret + ft_putchar_va(arg);
-				// 		n++;
-				// 	}
-				// else if (prt[n] == 's')
-				// 	{
-				// 		ret = ret + ft_putstr_par(va_arg(arg, char *));
-				// 		n++;
-				// 	}
-				// else if (prt[n] == 'p')
-				// 	{
-				// 		ret = ret + adr_hex(va_arg(arg, void *));
-				// 		n++;
-				// 	}
-				// else if ((prt[n] == 'd' || prt[n] == 'i' ))
-				// 	{
-				// 		ret = ret + di(va_arg(arg, int));
-				// 		n++;
-				// 	}
-				// else if ((prt[n] == 'u' || prt[n] == 'x' || prt[n] == 'X'))
-				// 	{
-				// 		ret = ret + flag(va_arg(arg, unsigned int), prt[n]);
-				// 		n++;
-				// 	}
-					else if ((prt[n] == 'u' || prt[n] == 'x' || prt[n] == 'X' || prt[n] == 'p' || prt[n] == 'd' || prt[n] == 'i' || prt[n] == 'c' || prt[n] == 's'))
-					{
-						ret = ret + flag(arg, prt[n]);
-						n++;
-					}
 			}
+		}
 	}
 	va_end(arg);
 	return (ret);
 }
 
-
-int	main ()
+int	main(void)
 {
 	char	*bline;
 	void	*melkor;
+	int		tez;
+	int		minne;
+
 	bline = "blineeeeer";
-	int tez;
-	int minne;
 
 	melkor = NULL;
-	tez = ft_printf ("Eldrich blast %s %d %i %u %c %x %X\n", "is cast and deals", 24, -21, 111, 'c', 111, 111);
-	minne = printf ("Eldrich blast %s %d %i %u %c %x %X\n", "is cast and deals", 24, -21, 111, 'c', 111, 111);
+	tez = ft_printf ("%%Eldrich blast %s %d %i %u %c %p %x %X%%\n%%", "is cast and deals", 24, -21, 111, 'c', melkor, 111, 111);
+	minne = printf ("%%Eldrich blast %s %d %i %u %c %p %x %X%%\n%%", "is cast and deals", 24, -21, 111, 'c', melkor, 111, 111);
 	printf ("ft_printf: %d\n", tez);
 	printf ("printf: %d\n", minne);
 }
