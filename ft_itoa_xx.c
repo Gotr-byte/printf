@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hexxt.c                                            :+:      :+:    :+:   */
+/*   ft_itoa_xx.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 15:53:08 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/07/04 15:53:08 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/07/11 13:31:32 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/07/11 13:39:07 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	pow_hexdec_xx(size_t n);
-static int		count_hexdec_xx(size_t n);
-static char		hex_digit_xx(size_t v);
+static char	hex_digit_xx(size_t v);
 
 static int	count_hexdec_xx(size_t n)
 {
@@ -78,29 +76,3 @@ static char	hex_digit_xx(size_t v)
 	else
 		return ('A' + v - 10);
 }
-
-// void print_address_hex (void* p0)
-// {
-//     int i;
-//     uintptr_t p;
-// 	p = (uintptr_t)p0;
-//     ft_putchar('0'); 
-// 	ft_putchar('x');
-// 	i = (sizeof(p) << 3) - 20;
-// 	while (i >= 0)
-// 	{
-// 		ft_putchar(hex_digit((p >> i) & 0xf));
-// 		i -= 4;
-// 	}
-// }
-
-// int main(void)
-// {
-// 	int t;
-
-// 	t = 512;
-
-// 	// printf	("%%d: %d\n%%x: %x\n", t, t);
-// 	printf("ft_itoa_x(%d): %s\n",t, ft_itoa_x(t));
-// 	printf("printf (%d): %x\n", t, t);
-// }
