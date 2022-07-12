@@ -2,7 +2,13 @@ NAME := libftprintf.a
 LIBFT_DIR = libft/
 LIBFT_EXEC = libft/libft.a
 SRCFILES := ft_printf.c \
-			ft_itoa_xx.c
+			ft_itoa_xx.c \
+			ft_itoa_x.c \
+			ft_itoa_lu.c \
+			ft_putstr_i.c \
+			adr_hex.c \
+			ft_putchar_i.c \
+			flag.c
 CC = gcc
 CFLAGS = -Wextra -Werror -Wall
 OBJS := $(SRCFILES:.c=.o) 
